@@ -9,12 +9,12 @@ export const ls = async (command) => {
     const dirContent = await readdir(currentDir, { withFileTypes: true });
 
     try {
-      const result = dirContent.map((el) => ({
+      const data = dirContent.map((el) => ({
         Name: el.name,
         Type: el.isDirectory() ? DIRECTORY : FILE,
       }));
 
-      result.sort((a, b) => {
+      data.sort((a, b) => {
         if (a.Type !== b.Type) {
           if (a.Type === FILE) {
             return 1;
@@ -24,7 +24,7 @@ export const ls = async (command) => {
         }
         return a.Name.localeCompare(b.Name);
       });
-      console.table(result);
+      console.table(data);
     } catch (error) {
       console.error(DIR_CONTENT_ERR);
     }
