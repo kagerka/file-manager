@@ -8,11 +8,12 @@ import { mv } from "./commands/basic/mv.js";
 import { rm } from "./commands/basic/rm.js";
 import { rn } from "./commands/basic/rn.js";
 import { exit } from "./commands/exit.js";
+import { hash } from "./commands/hash/hash.js";
 import { cd } from "./commands/navigation/cd.js";
 import { ls } from "./commands/navigation/ls.js";
 import { up } from "./commands/navigation/up.js";
 import { os } from "./commands/os/os.js";
-import { ADD, CAT, CD, CP, EXIT, LS, MKDIR, MV, OS, RM, RN, UP } from "./common/commands.js";
+import { ADD, CAT, CD, CP, EXIT, HASH, LS, MKDIR, MV, OS, RM, RN, UP } from "./common/commands.js";
 import { displayCurrentDir } from "./utils/displayCurrentDir.js";
 import { displayHomeDir } from "./utils/displayHomeDir.js";
 import { getHomeDir } from "./utils/getHomeDir.js";
@@ -67,6 +68,9 @@ export const app = async () => {
         break;
       case OS:
         await os(command, args);
+        break;
+      case HASH:
+        await hash(command, args);
         break;
 
       default:

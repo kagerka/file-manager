@@ -8,6 +8,7 @@ export const RENAME_FILE_ERR = "It's impossible to rename the file.";
 export const COPY_FILE_ERR = "It's impossible to copy the file.";
 export const MOVE_FILE_ERR = "It's impossible to move the file.";
 export const REMOVE_FILE_ERR = "It's impossible to remove the file.";
+export const HASH_FILE_ERR = "It's impossible to hash the file.";
 
 export const DIRECTORY = "directory";
 export const FILE = "file";
