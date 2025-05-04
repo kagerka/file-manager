@@ -11,7 +11,8 @@ import { exit } from "./commands/exit.js";
 import { cd } from "./commands/navigation/cd.js";
 import { ls } from "./commands/navigation/ls.js";
 import { up } from "./commands/navigation/up.js";
-import { ADD, CAT, CD, CP, EXIT, LS, MKDIR, MV, RM, RN, UP } from "./common/commands.js";
+import { os } from "./commands/os/os.js";
+import { ADD, CAT, CD, CP, EXIT, LS, MKDIR, MV, OS, RM, RN, UP } from "./common/commands.js";
 import { displayCurrentDir } from "./utils/displayCurrentDir.js";
 import { displayHomeDir } from "./utils/displayHomeDir.js";
 import { getHomeDir } from "./utils/getHomeDir.js";
@@ -63,6 +64,9 @@ export const app = async () => {
         break;
       case RM:
         await rm(command, args);
+        break;
+      case OS:
+        await os(command, args);
         break;
 
       default:

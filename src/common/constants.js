@@ -24,3 +24,4 @@ export const ADD_FILE_NAME = "Add the file name correctly.";
 export const ADD_DIR_NAME = "Add the folder name correctly.";
 export const ADD_NEW_NAME = "Add path to the file and a new filename correctly.";
 export const ADD_NEW_DIRNAME = "Add path to the file and a path to the new directory correctly.";
+export const ADD_COMMAND = "Write correct command.";
