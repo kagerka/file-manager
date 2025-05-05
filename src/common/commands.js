@@ -16,3 +16,5 @@ export const OS_HOMEDIR = "--homedir";
 export const OS_USERNAME = "--username";
 export const OS_ARCHITECTURE = "--architecture";
 export const HASH = "hash";
+export const COMPRESS = "compress";
+export const DECOMPRESS = "decompress";

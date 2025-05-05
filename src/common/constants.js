@@ -9,6 +9,8 @@ export const COPY_FILE_ERR = "It's impossible to copy the file.";
 export const MOVE_FILE_ERR = "It's impossible to move the file.";
 export const REMOVE_FILE_ERR = "It's impossible to remove the file.";
 export const HASH_FILE_ERR = "It's impossible to hash the file.";
+export const COMPRESS_FILE_ERR = "It's impossible to compress the file.";
+export const DECOMPRESS_FILE_ERR = "It's impossible to decompress the file.";
 
 export const DIRECTORY = "directory";
 export const FILE = "file";
@@ -20,6 +22,8 @@ export const RENAME_FILE_FINISHED = "The file was renamed successfully.";
 export const COPY_FILE_FINISHED = "The file was copied successfully.";
 export const MOVE_FILE_FINISHED = "The file was moved successfully.";
 export const REMOVE_FILE_FINISHED = "The file was removed successfully.";
+export const COMPRESS_FILE_FINISHED = "The file was compressed successfully.";
+export const DECOMPRESS_FILE_FINISHED = "The file was decompressed successfully.";
 
 export const ADD_FILE_NAME = "Add the file name correctly.";
 export const ADD_DIR_NAME = "Add the folder name correctly.";

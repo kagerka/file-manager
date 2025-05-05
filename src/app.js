@@ -7,13 +7,31 @@ import { mkdir } from "./commands/basic/mkdir.js";
 import { mv } from "./commands/basic/mv.js";
 import { rm } from "./commands/basic/rm.js";
 import { rn } from "./commands/basic/rn.js";
+import { compress } from "./commands/compress/compress.js";
+import { decompress } from "./commands/compress/decompress.js";
 import { exit } from "./commands/exit.js";
 import { hash } from "./commands/hash/hash.js";
 import { cd } from "./commands/navigation/cd.js";
 import { ls } from "./commands/navigation/ls.js";
 import { up } from "./commands/navigation/up.js";
 import { os } from "./commands/os/os.js";
-import { ADD, CAT, CD, CP, EXIT, HASH, LS, MKDIR, MV, OS, RM, RN, UP } from "./common/commands.js";
+import {
+  ADD,
+  CAT,
+  CD,
+  COMPRESS,
+  CP,
+  DECOMPRESS,
+  EXIT,
+  HASH,
+  LS,
+  MKDIR,
+  MV,
+  OS,
+  RM,
+  RN,
+  UP,
+} from "./common/commands.js";
 import { displayCurrentDir } from "./utils/displayCurrentDir.js";
 import { displayHomeDir } from "./utils/displayHomeDir.js";
 import { getHomeDir } from "./utils/getHomeDir.js";
@@ -71,6 +89,12 @@ export const app = async () => {
         break;
       case HASH:
         await hash(command, args);
+        break;
+      case COMPRESS:
+        await compress(command, args);
+        break;
+      case DECOMPRESS:
+        await decompress(command, args);
         break;
 
       default:
