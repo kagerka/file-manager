@@ -51,6 +51,11 @@ export const app = async () => {
     readline.prompt();
 
     readline.on("line", async (input) => {
+      if (!input.trim()) {
+        readline.prompt();
+        return;
+      }
+
       const [command, ...args] = input.trim().split(" ");
       try {
         switch (command) {
