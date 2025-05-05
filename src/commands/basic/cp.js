@@ -5,13 +5,13 @@ import { CP } from "../../common/commands.js";
 import { ADD_NEW_DIRNAME, COPY_FILE_ERR, COPY_FILE_FINISHED } from "../../common/constants.js";
 
 export const cp = async (command, args) => {
-  if (command !== CP || args.length !== 2) {
+  if (command !== CP) {
     console.error(ADD_NEW_DIRNAME);
     return;
   }
 
   const pathToFile = path.resolve(args[0]);
-  const pathToNewDir = path.resolve(args[1]);
+  const pathToNewDir = path.resolve([...args].slice(1).join(" ").trim());
 
   try {
     await access(pathToFile);
