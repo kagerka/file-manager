@@ -1,4 +1,4 @@
-import { createReadStream, createWriteStream } from "node:fs";
+import { constants, createReadStream, createWriteStream, promises } from "node:fs";
 import path from "node:path";
 import { pipeline } from "node:stream/promises";
 import { createBrotliDecompress } from "node:zlib";
@@ -12,6 +12,14 @@ export const decompress = async (command, args) => {
   }
 
   const pathToFile = path.resolve(args[0]);
+
+  try {
+    await promises.access(pathToFile, constants.F_OK);
+  } catch (error) {
+    console.error(`${DECOMPRESS_FILE_ERR} Error: ${error.message}`);
+    return;
+  }
+
   const fileName = path.basename(args[0], path.extname(args[0]));
   const pathToDestination = path.resolve(args[1], fileName);
   const readStream = createReadStream(pathToFile);
@@ -22,6 +30,6 @@ export const decompress = async (command, args) => {
     await pipeline(readStream, decompressFile, writeStream);
     console.log(DECOMPRESS_FILE_FINISHED);
   } catch (error) {
-    console.error(DECOMPRESS_FILE_ERR);
+    console.error(`${DECOMPRESS_FILE_ERR} Error: ${error.message}`);
   }
 };

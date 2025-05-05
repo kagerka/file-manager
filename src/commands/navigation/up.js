@@ -6,7 +6,7 @@ export const up = async (command) => {
     try {
       process.chdir("..");
     } catch (error) {
-      console.error(DIR_ERR);
+      console.error(`${DIR_ERR} Error: ${error.message}`);
     }
   }
 };

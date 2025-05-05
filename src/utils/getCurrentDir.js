@@ -1,4 +1,11 @@
+import { ERR } from "../common/constants.js";
+
 export const getCurrentDir = async () => {
-  const currentDir = process.cwd();
-  return currentDir;
+  try {
+    const currentDir = process.cwd();
+    return currentDir;
+  } catch (error) {
+    console.error(`${ERR}: ${error.message}`);
+    return null;
+  }
 };

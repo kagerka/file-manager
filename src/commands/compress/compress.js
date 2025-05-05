@@ -1,4 +1,5 @@
-import { createReadStream, createWriteStream } from "node:fs";
+import { constants, createReadStream, createWriteStream } from "node:fs";
+import { access } from "node:fs/promises";
 import path from "node:path";
 import { pipeline } from "node:stream/promises";
 import { createBrotliCompress } from "node:zlib";
@@ -12,7 +13,15 @@ export const compress = async (command, args) => {
   }
 
   const pathToFile = path.resolve(args[0]);
-  const fileName = path.basename(path.basename(pathToFile)) + ".br";
+
+  try {
+    await access(pathToFile, constants.F_OK);
+  } catch (error) {
+    console.error(`${COMPRESS_FILE_ERR} Error: ${error.message}`);
+    return;
+  }
+
+  const fileName = path.basename(pathToFile) + ".br";
   const pathToDestination = path.resolve(args[1], fileName);
   const readStream = createReadStream(pathToFile);
   const writeStream = createWriteStream(pathToDestination);
@@ -22,6 +31,6 @@ export const compress = async (command, args) => {
     await pipeline(readStream, compressFile, writeStream);
     console.log(COMPRESS_FILE_FINISHED);
   } catch (error) {
-    console.error(COMPRESS_FILE_ERR);
+    console.error(`${COMPRESS_FILE_ERR} Error: ${error.message}`);
   }
 };

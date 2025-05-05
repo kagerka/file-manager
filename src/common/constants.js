@@ -11,6 +11,12 @@ export const REMOVE_FILE_ERR = "It's impossible to remove the file.";
 export const HASH_FILE_ERR = "It's impossible to hash the file.";
 export const COMPRESS_FILE_ERR = "It's impossible to compress the file.";
 export const DECOMPRESS_FILE_ERR = "It's impossible to decompress the file.";
+export const APP_ERR = "Runtime error in the app";
+export const COMMAND_ERR = "Invalid command";
+export const ERR = "An error occurred";
+export const USERNAME_ERR = "Username was not found.";
+export const HOMEDIR_ERR = "Unable to get home directory";
+export const CURRENTDIR_ERR = "Unable to get current directory";
 
 export const DIRECTORY = "directory";
 export const FILE = "file";

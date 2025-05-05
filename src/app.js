@@ -32,6 +32,7 @@ import {
   RN,
   UP,
 } from "./common/commands.js";
+import { APP_ERR, COMMAND_ERR } from "./common/constants.js";
 import { displayCurrentDir } from "./utils/displayCurrentDir.js";
 import { displayHomeDir } from "./utils/displayHomeDir.js";
 import { getHomeDir } from "./utils/getHomeDir.js";
@@ -39,74 +40,89 @@ import { sayGoodbye } from "./utils/sayGoodbye.js";
 import { sayHello } from "./utils/sayHello.js";
 
 export const app = async () => {
-  await sayHello();
+  try {
+    await sayHello();
 
-  const homeDir = await getHomeDir();
-  process.chdir(homeDir);
-  await displayHomeDir();
+    const homeDir = await getHomeDir();
+    if (homeDir !== null) process.chdir(homeDir);
+    await displayHomeDir();
 
-  const readline = createInterface({ input, output });
-  readline.prompt();
-
-  readline.on("line", async (input) => {
-    const [command, ...args] = input.trim().split(" ");
-    switch (command) {
-      case EXIT:
-        await exit(command, readline);
-        break;
-      case UP:
-        await up(command);
-        break;
-      case CD:
-        await cd(command, args);
-        break;
-      case LS:
-        await ls(command);
-        break;
-      case CAT:
-        await cat(command, args);
-        break;
-      case ADD:
-        await add(command, args);
-        break;
-      case MKDIR:
-        await mkdir(command, args);
-        break;
-      case RN:
-        await rn(command, args);
-        break;
-      case CP:
-        await cp(command, args);
-        break;
-      case MV:
-        await mv(command, args);
-        break;
-      case RM:
-        await rm(command, args);
-        break;
-      case OS:
-        await os(command, args);
-        break;
-      case HASH:
-        await hash(command, args);
-        break;
-      case COMPRESS:
-        await compress(command, args);
-        break;
-      case DECOMPRESS:
-        await decompress(command, args);
-        break;
-
-      default:
-        break;
-    }
-
-    await displayCurrentDir();
+    const readline = createInterface({ input, output });
     readline.prompt();
-  });
 
-  readline.on("close", async () => {
-    await sayGoodbye();
-    process.exit(0);
-  });
+    readline.on("line", async (input) => {
+      const [command, ...args] = input.trim().split(" ");
+      try {
+        switch (command) {
+          case EXIT:
+            await exit(command, readline);
+            break;
+          case UP:
+            await up(command);
+            break;
+          case CD:
+            await cd(command, args);
+            break;
+          case LS:
+            await ls(command);
+            break;
+          case CAT:
+            await cat(command, args);
+            break;
+          case ADD:
+            await add(command, args);
+            break;
+          case MKDIR:
+            await mkdir(command, args);
+            break;
+          case RN:
+            await rn(command, args);
+            break;
+          case CP:
+            await cp(command, args);
+            break;
+          case MV:
+            await mv(command, args);
+            break;
+          case RM:
+            await rm(command, args);
+            break;
+          case OS:
+            await os(command, args);
+            break;
+          case HASH:
+            await hash(command, args);
+            break;
+          case COMPRESS:
+            await compress(command, args);
+            break;
+          case DECOMPRESS:
+            await decompress(command, args);
+            break;
+
+          default:
+            console.error(`${COMMAND_ERR}: ${command}`);
+            break;
+        }
+      } catch (error) {
+        console.error(`${APP_ERR}: '${command}': ${error.message}`);
+      }
+
+      await displayCurrentDir();
+      readline.prompt();
+    });
+
+    readline.on("close", async () => {
+      try {
+        await sayGoodbye();
+        process.exit(0);
+      } catch (error) {
+        console.error(`${APP_ERR}: ${error.message}`);
+        process.exit(1);
+      }
+    });
+  } catch (error) {
+    console.error(`${APP_ERR}: ${error.message}`);
+    process.exit(1);
+  }
 };

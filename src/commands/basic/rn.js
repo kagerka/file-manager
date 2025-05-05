@@ -17,6 +17,6 @@ export const rn = async (command, args) => {
     await rename(oldName, newName);
     console.log(RENAME_FILE_FINISHED);
   } catch (error) {
-    console.error(RENAME_FILE_ERR);
+    console.error(`${RENAME_FILE_ERR} Error: ${error.message}`);
   }
 };

@@ -15,6 +15,6 @@ export const rm = async (command, args) => {
     await remove(pathToFile);
     console.log(REMOVE_FILE_FINISHED);
   } catch (error) {
-    console.error(REMOVE_FILE_ERR);
+    console.error(`${REMOVE_FILE_ERR} Error: ${error.message}`);
   }
 };

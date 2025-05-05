@@ -37,6 +37,6 @@ export const mv = async (command, args) => {
       })
       .pipe(writeStream);
   } catch (error) {
-    console.error(MOVE_FILE_ERR);
+    console.error(`${MOVE_FILE_ERR} Error: ${error.message}`);
   }
 };
